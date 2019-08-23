@@ -7,11 +7,13 @@ class TodoList extends React.Component {
     const lists = this.props.lists;
     return (
       <ul>
-        {lists.map(line => (
+        {lists.map( (line, index ) => (
           <TodoItem 
             contents={line.contents} 
             completed={line.completed} 
-            id={line.id}/>
+            key= { index }
+            index = {index}
+            delete_btn_clicked={ this.props.delete_btn_clicked }/>
         ))}
       </ul>
     )
