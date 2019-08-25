@@ -16,6 +16,12 @@ class App extends React.Component{
 
   //junwoo ver.
   input_btn_clicked = (e) => {
+    //check the user input is not null
+    if (this.state.inputtodo_input === "") {
+      alert("할 일을 입력해주세요!");
+      return;
+    }
+
     this.setState({
       items: [
         ...this.state.items,
@@ -35,16 +41,17 @@ class App extends React.Component{
 
   input_input_changed = (e) => {
     //if user type "Enter" key then input the contents
-    if (e.target.key === "Enter"){
-      this.input_btn_clicked()
-    }
-    
     const new_contents = e.target.value;
     this.setState({ 
       inputtodo_input: new_contents 
     });
   }
 
+  input_input_handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.input_btn_clicked();
+    }    
+  }
 
   // delete_btn_clicked = (e) => {
   //   const clicked_index = Number(e.target.parentElement.getAttribute("index"));
@@ -73,11 +80,8 @@ class App extends React.Component{
   // }
 
   done_btn_clicked = index => {
-    
     const { items } = this.state;
-    console.log(items);
     const changed_item = items[index];
-    console.log(changed_item);
     changed_item.completed = !changed_item.completed;
     this.setState({
       items: [...items.slice(0, index), changed_item, ...items.slice(index+1, items.length)]
@@ -90,7 +94,8 @@ class App extends React.Component{
       <InputTodo 
         input={ this.state.inputtodo_input } 
         btn_listener={ this.input_btn_clicked } 
-        input_listener={ this.input_input_changed }/>
+        input_listener={ this.input_input_changed }
+        input_listener2={ this.input_input_handleKeyDown }/>
 
       <TodoList 
       items={ this.state.items } 

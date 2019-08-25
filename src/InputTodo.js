@@ -9,7 +9,8 @@ class InputTodo extends React.Component {
             type="text" 
             id="input_input" 
             value={this.props.input} 
-            onChange={this.props.input_listener}></input>
+            onChange={this.props.input_listener}
+            onKeyDown={this.props.input_listener2 }></input>
         <button 
             id="input_btn" 
             onClick={this.props.btn_listener}>Add</button>
