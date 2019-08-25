@@ -34,6 +34,11 @@ class App extends React.Component{
 
 
   input_input_changed = (e) => {
+    //if user type "Enter" key then input the contents
+    if (e.target.key === "Enter"){
+      this.input_btn_clicked()
+    }
+    
     const new_contents = e.target.value;
     this.setState({ 
       inputtodo_input: new_contents 
