@@ -25,6 +25,11 @@ class App extends React.Component{
         },
       ],
     });
+
+    //after new item is added to state clear the input
+    this.setState({
+      inputtodo_input: ""
+    });
   }
 
 
