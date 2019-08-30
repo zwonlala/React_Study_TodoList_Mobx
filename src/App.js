@@ -47,11 +47,7 @@ class App extends React.Component{
     });
   }
 
-  input_input_handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      this.input_btn_clicked();
-    }    
-  }
+  
 
   // delete_btn_clicked = (e) => {
   //   const clicked_index = Number(e.target.parentElement.getAttribute("index"));
@@ -94,8 +90,7 @@ class App extends React.Component{
       <InputTodo 
         input={ this.state.inputtodo_input } 
         btn_listener={ this.input_btn_clicked } 
-        input_listener={ this.input_input_changed }
-        input_listener2={ this.input_input_handleKeyDown }/>
+        input_listener={ this.input_input_changed }/>
 
       <TodoList 
       items={ this.state.items } 
