@@ -1,19 +1,26 @@
 import React from 'react';
+import { observable, action } from 'mobx';
+import { observer, inject } from 'mbox-react';
 
+@inject('todoList')
+
+@observer
 class InputTodo extends React.Component {
     
   render(){
+    const { inputtodo_input, input_input_changed, input_btn_clicked } = this.props;
+
     return (
       <div>
         <input 
             type="text" 
             id="input_input" 
-            value={this.props.input} 
-            onChange={this.props.input_listener}
+            value={inputtodo_input}
+            onChange={input_input_changed}
             onKeyDown={ this.input_input_handleKeyDown }></input>
         <button 
             id="input_btn" 
-            onClick={this.props.btn_listener}>Add</button>
+            onClick={input_btn_clicked}></button>
       </div>
     )
   }

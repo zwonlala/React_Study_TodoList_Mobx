@@ -2,11 +2,22 @@ import React from 'react';
 import TodoList from './TodoList';
 import InputTodo from './InputTodo';
 
+import { Provider } from 'mbox-react';
+import TodoListStore from '././store/TodoListStore';
+
+
+const todoList = new TodoListStore();
+
+
 class App extends React.Component{
-  state = {
-    inputtodo_input:"",
-    items : [],
-  }
+
+
+
+
+  // state = {
+  //   inputtodo_input:"",
+  //   items : [],
+  // }
 
   // input_btn_clicked = (e) => {
   //   const text = this.state.inputtodo_input;
@@ -14,38 +25,38 @@ class App extends React.Component{
   //   this.setState(current => ({ lists: current.lists.concat(new_lists)}));
   // }
 
-  //junwoo ver.
-  input_btn_clicked = (e) => {
-    //check the user input is not null
-    if (this.state.inputtodo_input === "") {
-      alert("할 일을 입력해주세요!");
-      return;
-    }
+  // //junwoo ver.
+  // input_btn_clicked = (e) => {
+  //   //check the user input is not null
+  //   if (this.state.inputtodo_input === "") {
+  //     alert("할 일을 입력해주세요!");
+  //     return;
+  //   }
 
-    this.setState({
-      items: [
-        ...this.state.items,
-        {
-          contents: this.state.inputtodo_input,
-          completed: false,
-        },
-      ],
+  //   this.setState({
+  //     items: [
+  //       ...this.state.items,
+  //       {
+  //         contents: this.state.inputtodo_input,
+  //         completed: false,
+  //       },
+  //     ],
       
-      //after new item is added to state clear the input
-      inputtodo_input: ""
-    });
+  //     //after new item is added to state clear the input
+  //     inputtodo_input: ""
+  //   });
 
     
-  }
+  // }
 
 
-  input_input_changed = (e) => {
-    //if user type "Enter" key then input the contents
-    const new_contents = e.target.value;
-    this.setState({ 
-      inputtodo_input: new_contents 
-    });
-  }
+  // input_input_changed = (e) => {
+  //   //if user type "Enter" key then input the contents
+  //   const new_contents = e.target.value;
+  //   this.setState({ 
+  //     inputtodo_input: new_contents 
+  //   });
+  // }
 
   
 
@@ -58,13 +69,13 @@ class App extends React.Component{
   //   this.setState({ lists: new_lists});
   // }
 
-  //junwoo ver.
-  delete_btn_clicked = index => {
-    const { items } = this.state;
-    this.setState({
-      items: [...items.slice(0, index), ...items.slice(index+1, items.length)],
-    });
-  }
+  // //junwoo ver.
+  // delete_btn_clicked = index => {
+  //   const { items } = this.state;
+  //   this.setState({
+  //     items: [...items.slice(0, index), ...items.slice(index+1, items.length)],
+  //   });
+  // }
 
 
   // done_btn_clicked = (e) => {
@@ -75,18 +86,18 @@ class App extends React.Component{
   //   this.setState({ items: new_items });
   // }
 
-  done_btn_clicked = index => {
-    const { items } = this.state;
-    const changed_item = items[index];
-    changed_item.completed = !changed_item.completed;
-    this.setState({
-      items: [...items.slice(0, index), changed_item, ...items.slice(index+1, items.length)]
-    });
+  // done_btn_clicked = index => {
+  //   const { items } = this.state;
+  //   const changed_item = items[index];
+  //   changed_item.completed = !changed_item.completed;
+  //   this.setState({
+  //     items: [...items.slice(0, index), changed_item, ...items.slice(index+1, items.length)]
+  //   });
     
-  }
+  // }
 
   render(){
-    return <div>
+    return <Provider todoList={todoList}>
       <InputTodo 
         input={ this.state.inputtodo_input } 
         btn_listener={ this.input_btn_clicked } 
@@ -96,7 +107,7 @@ class App extends React.Component{
       items={ this.state.items } 
       delete_btn_clicked={ this.delete_btn_clicked }
       done_btn_clicked ={ this.done_btn_clicked }/>    
-    </div>;
+    </Provider>;
   }
 }
 
