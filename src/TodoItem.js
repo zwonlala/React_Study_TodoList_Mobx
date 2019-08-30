@@ -5,9 +5,7 @@ function TodoItem({contents, completed, delete_btn_clicked, index, done_btn_clic
     
     return (
         <li index={ index }>
-            {completed? 
-                <span style={{textDecoration:"line-through", color:"rgb(128,128,128" }}>{ contents }</span>
-                : <span>{ contents }</span>}
+            <span style={ completed? {textDecoration:"line-through", color:"rgb(128,128,128)" } : {} }>{ contents }</span>
             <button onClick={ () => done_btn_clicked(index) }>
                 {completed? "되돌리기": "완료"}
             </button>
